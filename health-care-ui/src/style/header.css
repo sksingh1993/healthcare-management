@@ -1,0 +1,21 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.clock-right {
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  text-align: right;   /* aligns time + date nicely */
+}
+
+.clock-right h4,h5 {
+   margin: 0;           /* remove default spacing */
+  line-height: 1.2;     /* 👈 controls gap between lines */
+}
+.app-container {
+
+  position: relative;
+}
+
