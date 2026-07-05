@@ -3,122 +3,83 @@ import { useNavigate } from "react-router-dom";
 
 import { login as loginService } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
+import LoginForm from "../../components/auth/LoginForm";
 
-function Login() {
+export default function Login() {
 
     const navigate = useNavigate();
 
     const { login } = useAuth();
 
-    const [formData, setFormData] = useState({
+    const [credentials, setCredentials] = useState({
         userName: "",
         password: ""
     });
 
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
+    const [loading, setLoading] = useState(false);
 
-        const { name, value } = e.target;
+    const validate = () => {
 
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        const validationErrors = {};
+
+        if (!credentials.userName.trim()) {
+            validationErrors.userName = "Username is required";
+        }
+
+        if (!credentials.password.trim()) {
+            validationErrors.password = "Password is required";
+        }
+
+        setErrors(validationErrors);
+
+        return Object.keys(validationErrors).length === 0;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
 
-        e.preventDefault();
-
-        setError("");
+        if (!validate()) {
+            return;
+        }
 
         try {
 
-            const response = await loginService(formData);
+            setLoading(true);
 
+            const response = await loginService(credentials);
 
             login(response);
-        
-
 
             navigate("/dashboard");
 
-        } catch (err) {
+        } catch (error) {
 
-            setError(
-                err.response?.data?.message ||
-                "Invalid username or password"
-            );
+            setErrors({
+                general:
+                    error.response?.data?.message ||
+                    "Invalid username or password"
+            });
+
+        } finally {
+
+            setLoading(false);
+
         }
 
     };
 
     return (
-        <div
-            style={{
-                width: "350px",
-                margin: "100px auto"
-            }}
-        >
 
-            <h2>Health Care Login</h2>
+        <LoginForm
+            credentials={credentials}
+            setCredentials={setCredentials}
+            errors={errors}
+            setErrors={setErrors}
+            loading={loading}
+            onSubmit={handleSubmit}
+        />
 
-            <form onSubmit={handleSubmit}>
-
-                <div>
-
-                    <label>Username</label>
-
-                    <br />
-
-                    <input
-                        type="text"
-                        name="userName"
-                        value={formData.userName}
-                        onChange={handleChange}
-                    />
-
-                </div>
-
-                <br />
-
-                <div>
-
-                    <label>Password</label>
-
-                    <br />
-
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-
-                </div>
-
-                <br />
-
-                {error &&
-
-                    <p style={{ color: "red" }}>
-                        {error}
-                    </p>
-
-                }
-
-                <button type="submit">
-
-                    Login
-
-                </button>
-
-            </form>
-
-        </div>
     );
 
 }
-
-export default Login;
