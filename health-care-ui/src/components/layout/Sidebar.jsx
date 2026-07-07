@@ -77,7 +77,7 @@ export default function Sidebar() {
                 }
             }}
         >
-         <Card>
+         {/* <Card>
                 <CardMedia
                     component="img"
                     height="200"
@@ -85,7 +85,21 @@ export default function Sidebar() {
                     image="public\healthCareLogo.jpeg"   // public folder path
                     alt="Banner"
                 />
-            </Card>
+            </Card> */}
+
+            <Card>
+  <CardMedia
+    component="img"
+    image="/Gemini_Generated_Image_resize_2.png"
+    alt="Banner"
+    sx={{
+      height: 150,
+      width: "100%",
+      objectFit: "cover" // fills area, but may crop
+    }}
+  />
+</Card>
+
 
             <Toolbar />
 
