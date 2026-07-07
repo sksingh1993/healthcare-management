@@ -15,7 +15,7 @@ import FormSection from "../../components/common/FormSection";
 import { GENDERS } from "../../constants/gender";
 import { BLOOD_GROUP } from "../../constants/bloodGroup";
 
-export default function PatientForm({
+export default function PatientEditForm({
 
     title,
     patient,
@@ -66,29 +66,27 @@ export default function PatientForm({
             <FormSection title="Personal Information">
 
                 <Grid container spacing={2}>
-                    {/* <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
-                            label="Username"
-                            name="username"
-                            value={patient.username}
+
+                            label="Full Name"
+
+                            name="fullName"
+
+                            value={patient.fullName}
+
                             onChange={handleChange}
-                            error={errors.username}
-                            helperText={errors.username}
+
+                            error={errors.fullName}
+
+                            helperText={errors.fullName}
+
                             required
+
+                            InputProps={{ readOnly: true }}
+
                         />
-                    </Grid> */}
-                    {/* <Grid size={{ xs: 12, md: 6 }}>
-                        <AppTextField
-                            label="Password"
-                            name="password"
-                            type="password"
-                            value={patient.password}
-                            onChange={handleChange}
-                            error={errors.password}
-                            helperText={errors.password}
-                            required
-                        />
-                    </Grid> */}
+                    </Grid>
 
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
@@ -209,15 +207,13 @@ export default function PatientForm({
 
                             name="emergencyContactName"
 
-                           
-
                             value={patient.emergencyContactName}
 
                             onChange={handleChange}
 
-                            error={errors.experienceYears}
+                            error={errors.emergencyContactName}
 
-                            helperText={errors.experienceYears}
+                            helperText={errors.emergencyContactName}
 
                             required
 
@@ -247,8 +243,8 @@ export default function PatientForm({
                         />
 
                     </Grid>
-                    
-                    
+
+
 
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
@@ -267,56 +263,56 @@ export default function PatientForm({
                 </Grid>
             </FormSection>
             <FormSection title="Health Information">
-
-                <Grid container spacing={2}>
-
-                    <Grid size={{ xs: 12, md: 6 }}>
-
-                        <AppSelect
-                            label="BloodGroup"
-
-                            name="bloodGroup"
-
-                            value={patient.bloodGroup}
-
-                            onChange={handleChange}    
-                            options={BLOOD_GROUP}                        
-
-                            error={errors.specialization}
-
-                            helperText={errors.specialization}
-
-                            required
-
-                        />
-
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-
-                        <AppTextField
-
-                            label="Allergies"
-
-                            name="allergies"
-
-                            value={patient.allergies}
-
-                            onChange={handleChange}
-
-                            error={errors.qualification}
-
-                            helperText={errors.qualification}
-
-                            required
-
-                        />
-
-                    </Grid>
-                    
-                </Grid>
-
-            </FormSection>
-
+            
+                            <Grid container spacing={2}>
+            
+                                <Grid size={{ xs: 12, md: 6 }}>
+            
+                                    <AppSelect
+                                        label="BloodGroup"
+            
+                                        name="bloodGroup"
+            
+                                        value={patient.bloodGroup}
+            
+                                        onChange={handleChange}    
+                                        options={BLOOD_GROUP}                        
+            
+                                        error={errors.specialization}
+            
+                                        helperText={errors.specialization}
+            
+                                        required
+            
+                                    />
+            
+                                </Grid>
+                                <Grid size={{ xs: 12, md: 6 }}>
+            
+                                    <AppTextField
+            
+                                        label="Allergies"
+            
+                                        name="allergies"
+            
+                                        value={patient.allergies}
+            
+                                        onChange={handleChange}
+            
+                                        error={errors.qualification}
+            
+                                        helperText={errors.qualification}
+            
+                                        required
+            
+                                    />
+            
+                                </Grid>
+                                
+                            </Grid>
+            
+                        </FormSection>
+            
             <Box
                 sx={{
                     display: "flex",

@@ -83,7 +83,7 @@ function DoctorList() {
     const handleSearchChange = (event) => {
 
         const { name, value } = event.target;
-
+        console.log(event.target);
         setSearch(prev => ({
             ...prev,
             [name]: value

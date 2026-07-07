@@ -14,6 +14,10 @@ import DoctorForm from "../pages/doctor/DoctorForm";
 import CreateDoctor from "../pages/doctor/CreateDoctor";
 import ViewDoctor from "../pages/doctor/ViewDoctor";
 import EditDoctor from "../pages/doctor/EditDoctor";
+import PatientList from "../pages/patient/PatientList";
+import CreatePatient from "../pages/patient/CreatePatient";
+import ViewPatient from "../pages/patient/ViewPatient";
+import EditPatient from "../pages/patient/EditPatient";
 
 export default function AppRoutes() {
 
@@ -35,6 +39,11 @@ export default function AppRoutes() {
                         <Route path="/doctor/new" element={<CreateDoctor />} />
                         <Route path="/doctor/:id" element={<ViewDoctor />} />
                         <Route path="/doctor/edit/:id" element={<EditDoctor />} />
+
+                        <Route path="/patient" element={<PatientList />}/>
+                        <Route path="/patient/new" element={<CreatePatient />}/>
+                        <Route path="/patient/:id" element={<ViewPatient />}/>
+                        <Route path="/patient/edit/:id" element={<EditPatient />}/>
                         {/* <Route path="/doctor/new" element={<CreateDoctor />} />
 
                         <Route path="/doctor/edit/:id" element={<EditDoctor />} />
