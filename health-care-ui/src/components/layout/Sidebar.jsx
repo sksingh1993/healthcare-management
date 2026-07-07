@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 import {
     Box,
+    Card,
+    CardMedia,
     Drawer,
     List,
     ListItemButton,
@@ -75,6 +77,15 @@ export default function Sidebar() {
                 }
             }}
         >
+         <Card>
+                <CardMedia
+                    component="img"
+                    height="200"
+                    width="100"
+                    image="public\healthCareLogo.jpeg"   // public folder path
+                    alt="Banner"
+                />
+            </Card>
 
             <Toolbar />
 
