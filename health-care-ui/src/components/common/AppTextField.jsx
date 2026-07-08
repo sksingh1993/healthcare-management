@@ -22,7 +22,7 @@ export default function AppTextField({
             onChange={onChange}
             required={required}
             type={type}
-            error={!!error}
+            error={Boolean(error)}
             helperText={helperText}
             multiline={multiline}
             rows={rows}

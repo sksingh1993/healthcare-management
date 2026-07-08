@@ -18,6 +18,10 @@ import PatientList from "../pages/patient/PatientList";
 import CreatePatient from "../pages/patient/CreatePatient";
 import ViewPatient from "../pages/patient/ViewPatient";
 import EditPatient from "../pages/patient/EditPatient";
+import StaffList from "../pages/staff/StaffList";
+import CreateStaff from "../pages/staff/CreateStaff";
+import EditStaff from "../pages/staff/EditStaff";
+import ViewStaff from "../pages/staff/ViewStaff";
 
 export default function AppRoutes() {
 
@@ -44,6 +48,15 @@ export default function AppRoutes() {
                         <Route path="/patient/new" element={<CreatePatient />}/>
                         <Route path="/patient/:id" element={<ViewPatient />}/>
                         <Route path="/patient/edit/:id" element={<EditPatient />}/>
+
+                        <Route path="/staff" element={<StaffList />} />
+                        <Route path="/staff/new" element={<CreateStaff />} />
+                        <Route path="/staff/edit/:id" element={<EditStaff />} />
+                        <Route path="/staff/:id" element={<ViewStaff />} />
+                        {/* <Route path="/doctor/new" element={<CreateDoctor />} />
+                        <Route path="/doctor/:id" element={<ViewDoctor />} />
+                        <Route path="/doctor/edit/:id" element={<EditDoctor />} /> */}
+
                         {/* <Route path="/doctor/new" element={<CreateDoctor />} />
 
                         <Route path="/doctor/edit/:id" element={<EditDoctor />} />

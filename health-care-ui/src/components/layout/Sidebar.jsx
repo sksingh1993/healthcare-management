@@ -106,8 +106,8 @@ export default function Sidebar() {
                     image={logo}
                     alt="Banner"
                     sx={{
-                        height: 150,
-                        width: "100",
+                        height: 140,
+                        width: "100%",
                         objectFit: "contain" // fills area, but may crop
                     }}
                 />

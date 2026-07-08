@@ -32,6 +32,10 @@ export default function EditDoctor() {
 
     }, []);
 
+    useEffect(() => {
+    //console.log("Errors:", errors);
+}, [errors]);
+
     const loadDoctor = async () => {
 
         try {
@@ -39,7 +43,7 @@ export default function EditDoctor() {
             setLoading(true);
 
             const response = await getDoctorById(id);
-            console.log(response);
+           // console.log(response);
 
             setDoctor(response.data);
 
@@ -66,8 +70,20 @@ export default function EditDoctor() {
             navigate("/doctor");
 
         } catch (error) {
+             console.log(error)
 
-            handleApiError(error, setErrors);
+             handleApiError(error, setErrors);
+
+             if (error.response?.data?.validationErrors) {
+                console.log("Backend validation:", error.response.data.validationErrors);
+
+            setErrors(error.response.data.validationErrors);
+
+            return;
+
+        }
+
+        handleApiError(error);
 
         } finally {
 
