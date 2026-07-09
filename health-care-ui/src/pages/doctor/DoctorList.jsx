@@ -20,7 +20,7 @@ function DoctorList() {
 
     const [page, setPage] = useState(0);
 
-    const [size] = useState(10);
+    const [size] = useState(5);
 
     const [totalPages, setTotalPages] = useState(0);
 
@@ -83,7 +83,7 @@ function DoctorList() {
     const handleSearchChange = (event) => {
 
         const { name, value } = event.target;
-
+        console.log(event.target);
         setSearch(prev => ({
             ...prev,
             [name]: value

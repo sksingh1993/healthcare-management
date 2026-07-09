@@ -10,7 +10,8 @@ export default function AppTextField({
     required = false,
     type = "text",
     multiline = false,
-    rows = 1
+    rows = 1,
+    ...rest
 }) {
     return (
         <TextField
@@ -21,7 +22,7 @@ export default function AppTextField({
             onChange={onChange}
             required={required}
             type={type}
-            error={!!error}
+            error={Boolean(error)}
             helperText={helperText}
             multiline={multiline}
             rows={rows}
@@ -30,6 +31,7 @@ export default function AppTextField({
                     shrink: true
                 }
             }}
+            {...rest}
         />
     );
 }

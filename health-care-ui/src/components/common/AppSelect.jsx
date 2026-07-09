@@ -12,7 +12,7 @@ export default function AppSelect({
     name,
     value,
     onChange,
-    options,
+    options=[],
     error,
     helperText,
     required = false
@@ -37,7 +37,7 @@ export default function AppSelect({
             >
 
                 {
-                    options.map(option => (
+                    (options || []).map(option => (
 
                         <MenuItem
                             key={option.value}

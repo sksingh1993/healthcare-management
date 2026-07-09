@@ -13,16 +13,14 @@ import FormSection from "../../components/common/FormSection";
 
 // Constants
 import { GENDERS } from "../../constants/gender";
-import { SPECIALIZATIONS } from "../../constants/specialization";
-import { DEPARTMENT } from "../../constants/department";
-import { ROLE_TYPE } from "../../constants/roleType";
+import { BLOOD_GROUP } from "../../constants/bloodGroup";
 
-export default function StaffForm({
+export default function PatientEditForm({
 
     title,
-    staff,
+    patient,
 
-    setStaff,
+    setPatient,
     setErrors,
 
     errors,
@@ -41,7 +39,7 @@ export default function StaffForm({
 
         const { name, value } = event.target;
 
-        setStaff(prev => ({
+        setPatient(prev => ({
             ...prev,
             [name]: value
         }));
@@ -70,25 +68,23 @@ export default function StaffForm({
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
-                            label="Username"
-                            name="username"
-                            value={staff.username}
+
+                            label="Full Name"
+
+                            name="fullName"
+
+                            value={patient.fullName}
+
                             onChange={handleChange}
-                            error={errors.username}
-                            helperText={errors.username}
+
+                            error={errors.fullName}
+
+                            helperText={errors.fullName}
+
                             required
-                        />
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <AppTextField
-                            label="Password"
-                            name="password"
-                            type="password"
-                            value={staff.password}
-                            onChange={handleChange}
-                            error={errors.password}
-                            helperText={errors.password}
-                            required
+
+                            InputProps={{ readOnly: true }}
+
                         />
                     </Grid>
 
@@ -99,7 +95,7 @@ export default function StaffForm({
 
                             name="firstName"
 
-                            value={staff.firstName}
+                            value={patient.firstName}
 
                             onChange={handleChange}
 
@@ -119,7 +115,7 @@ export default function StaffForm({
 
                             name="lastName"
 
-                            value={staff.lastName}
+                            value={patient.lastName}
 
                             onChange={handleChange}
 
@@ -142,7 +138,7 @@ export default function StaffForm({
 
                             type="number"
 
-                            value={staff.mobile}
+                            value={patient.mobile}
 
                             onChange={handleChange}
 
@@ -163,7 +159,7 @@ export default function StaffForm({
 
                             name="email"
 
-                            value={staff.email}
+                            value={patient.email}
 
                             onChange={handleChange}
 
@@ -180,7 +176,7 @@ export default function StaffForm({
                         <AppSelect
                             label="Gender"
                             name="gender"
-                            value={staff.gender}
+                            value={patient.gender}
                             onChange={handleChange}
                             options={GENDERS}
                             error={errors.gender}
@@ -195,7 +191,7 @@ export default function StaffForm({
                             label="Date of Birth"
                             name="dateOfBirth"
                             type="date"
-                            value={staff.dateOfBirth || ""}
+                            value={patient.dateOfBirth || ""}
                             onChange={handleChange}
                             error={errors.dateOfBirth}
                             helperText={errors.dateOfBirth}
@@ -203,53 +199,21 @@ export default function StaffForm({
                         />
 
                     </Grid>
-
-                </Grid>
-            </FormSection>
-            <FormSection title="Professional Information">
-
-                <Grid container spacing={2}>
-
                     <Grid size={{ xs: 12, md: 6 }}>
 
-                        <AppSelect
+                        <AppTextField
 
-                            label="Department"
+                            label="Emergency Contact Name"
 
-                            name="department"
+                            name="emergencyContactName"
 
-                            value={staff.department}
+                            value={patient.emergencyContactName}
 
                             onChange={handleChange}
 
-                            options={DEPARTMENT}
+                            error={errors.emergencyContactName}
 
-                            error={errors.department}
-
-                            helperText={errors.department}
-
-                            required
-
-                        />
-
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-
-                        <AppSelect
-
-                            label="Designation"
-
-                            name="designation"
-
-                            value={staff.designation}
-
-                            onChange={handleChange}
-
-                            options={ROLE_TYPE}
-
-                            error={errors.designation}
-
-                            helperText={errors.designation}
+                            helperText={errors.emergencyContactName}
 
                             required
 
@@ -260,31 +224,33 @@ export default function StaffForm({
 
                         <AppTextField
 
-                            label="Date of joining"
+                            label="Emergent Contact Number"
 
-                            name="joiningDate"
+                            name="emergencyContactNumber"
 
-                            type="date"
+                            type="number"
 
-                            value={staff.joiningDate}
+                            value={patient.emergencyContactNumber}
 
                             onChange={handleChange}
 
-                            error={errors.joiningDate}
+                            error={errors.emergencyContactNumber}
 
-                            helperText={errors.joiningDate}
+                            helperText={errors.emergencyContactNumber}
 
                             required
 
                         />
 
                     </Grid>
+
+
 
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
                             label="Address"
                             name="address"
-                            value={staff.address}
+                            value={patient.address}
                             onChange={handleChange}
                             error={errors.address}
                             helperText={errors.address}
@@ -293,10 +259,60 @@ export default function StaffForm({
                             required
                         />
                     </Grid>
+
                 </Grid>
-
             </FormSection>
-
+            <FormSection title="Health Information">
+            
+                            <Grid container spacing={2}>
+            
+                                <Grid size={{ xs: 12, md: 6 }}>
+            
+                                    <AppSelect
+                                        label="BloodGroup"
+            
+                                        name="bloodGroup"
+            
+                                        value={patient.bloodGroup}
+            
+                                        onChange={handleChange}    
+                                        options={BLOOD_GROUP}                        
+            
+                                        error={errors.specialization}
+            
+                                        helperText={errors.specialization}
+            
+                                        required
+            
+                                    />
+            
+                                </Grid>
+                                <Grid size={{ xs: 12, md: 6 }}>
+            
+                                    <AppTextField
+            
+                                        label="Allergies"
+            
+                                        name="allergies"
+            
+                                        value={patient.allergies}
+            
+                                        onChange={handleChange}
+            
+                                        error={errors.qualification}
+            
+                                        helperText={errors.qualification}
+            
+                                        required
+            
+                                    />
+            
+                                </Grid>
+                                
+                            </Grid>
+            
+                        </FormSection>
+            
             <Box
                 sx={{
                     display: "flex",
