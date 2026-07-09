@@ -20,6 +20,8 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import EventIcon from "@mui/icons-material/Event";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import logo from "../../assets/image_u2mzq_381.png";
+
 
 const drawerWidth = 240;
 
@@ -77,7 +79,7 @@ export default function Sidebar() {
                 }
             }}
         >
-         <Card>
+            {/* <Card>
                 <CardMedia
                     component="img"
                     height="200"
@@ -85,7 +87,33 @@ export default function Sidebar() {
                     image="public\healthCareLogo.jpeg"   // public folder path
                     alt="Banner"
                 />
-            </Card>
+            </Card> */}
+            {/* <div
+                style={{
+                    display: "flex",          // enables flexbox
+                    justifyContent: "center", // centers horizontally
+                    alignItems: "center",     // centers vertically
+                   // height: "200px",          // container height
+                   // backgroundColor: "lightblue" // background color
+                }}
+            >
+                <img src={logo} style={{ width: "140px", height: "140px" }} />
+            </div> */}
+
+             <Card>
+                <CardMedia
+                    component="img"
+                    image={logo}
+                    alt="Banner"
+                    sx={{
+                        height: 140,
+                        width: "100%",
+                        objectFit: "contain" // fills area, but may crop
+                    }}
+                />
+            </Card> 
+
+
 
             <Toolbar />
 

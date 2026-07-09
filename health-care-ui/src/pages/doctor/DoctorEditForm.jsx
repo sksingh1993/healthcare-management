@@ -51,7 +51,6 @@ export default function DoctorEditForm({
             }));
         }
     };
-
     return (
 
         <>
@@ -66,7 +65,7 @@ export default function DoctorEditForm({
             <FormSection title="Personal Information">
 
                 <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    {/* <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
 
                             label="Full Name"
@@ -86,7 +85,7 @@ export default function DoctorEditForm({
                             InputProps={{ readOnly: true }}
 
                         />
-                    </Grid>
+                    </Grid> */}
 
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField

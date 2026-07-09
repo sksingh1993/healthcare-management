@@ -13,11 +13,10 @@ import FormSection from "../../components/common/FormSection";
 
 // Constants
 import { GENDERS } from "../../constants/gender";
-import { SPECIALIZATIONS } from "../../constants/specialization";
 import { DEPARTMENT } from "../../constants/department";
 import { ROLE_TYPE } from "../../constants/roleType";
 
-export default function StaffForm({
+export default function StaffEditForm({
 
     title,
     staff,
@@ -53,7 +52,7 @@ export default function StaffForm({
             }));
         }
     };
-
+    console.log(staff)
     return (
 
         <>
@@ -68,29 +67,27 @@ export default function StaffForm({
             <FormSection title="Personal Information">
 
                 <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    {/* <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
-                            label="Username"
-                            name="username"
-                            value={staff.username}
+
+                            label="Full Name"
+
+                            name="fullName"
+
+                            value={staff.fullName}
+
                             onChange={handleChange}
-                            error={errors.username}
-                            helperText={errors.username}
+
+                            error={errors.fullName}
+
+                            helperText={errors.fullName}
+
                             required
+
+                            InputProps={{ readOnly: true }}
+
                         />
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <AppTextField
-                            label="Password"
-                            name="password"
-                            type="password"
-                            value={staff.password}
-                            onChange={handleChange}
-                            error={errors.password}
-                            helperText={errors.password}
-                            required
-                        />
-                    </Grid>
+                    </Grid> */}
 
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
@@ -237,7 +234,7 @@ export default function StaffForm({
 
                         <AppSelect
 
-                            label="Designation"
+                            label="Department"
 
                             name="designation"
 
@@ -279,7 +276,6 @@ export default function StaffForm({
                         />
 
                     </Grid>
-
                     <Grid size={{ xs: 12, md: 6 }}>
                         <AppTextField
                             label="Address"
@@ -293,6 +289,7 @@ export default function StaffForm({
                             required
                         />
                     </Grid>
+                    
                 </Grid>
 
             </FormSection>
