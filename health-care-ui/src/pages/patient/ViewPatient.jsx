@@ -5,7 +5,8 @@ import {
     Box,
     Button,
     CircularProgress,
-    Grid
+    Grid,
+    Stack
 } from "@mui/material";
 
 import PageHeader from "../../components/common/PageHeader";
@@ -14,6 +15,7 @@ import DetailItem from "../../components/common/DetailItem";
 
 import { getPatientById } from "../../services/patientService";
 import { handleApiError } from "../../utils/apiErrorHandler";
+
 
 export default function ViewPatient() {
 
@@ -69,12 +71,21 @@ export default function ViewPatient() {
 
         <>
 
-            {/* <PageHeader title="Doctor Details" /> */}
             <PageHeader
                 title="Patient Details"
-                buttonText="Edit"
-                onButtonClick={() => navigate(`/patient/edit/${id}`)}
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate(`/patient/edit/${id}`)}
+                        >
+                            Edit
+                        </Button>
+
+                    </Stack>
+                }
             />
+
 
             <FormSection title="Personal Information">
 

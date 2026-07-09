@@ -22,6 +22,9 @@ import StaffList from "../pages/staff/StaffList";
 import CreateStaff from "../pages/staff/CreateStaff";
 import EditStaff from "../pages/staff/EditStaff";
 import ViewStaff from "../pages/staff/ViewStaff";
+import LeaveList from "../pages/leave/LeaveList";
+import CreateLeave from "../pages/leave/CreateLeave";
+import ViewLeave from "../pages/leave/ViewLeave";
 
 export default function AppRoutes() {
 
@@ -53,21 +56,11 @@ export default function AppRoutes() {
                         <Route path="/staff/new" element={<CreateStaff />} />
                         <Route path="/staff/edit/:id" element={<EditStaff />} />
                         <Route path="/staff/:id" element={<ViewStaff />} />
-                        {/* <Route path="/doctor/new" element={<CreateDoctor />} />
-                        <Route path="/doctor/:id" element={<ViewDoctor />} />
-                        <Route path="/doctor/edit/:id" element={<EditDoctor />} /> */}
-
-                        {/* <Route path="/doctor/new" element={<CreateDoctor />} />
-
-                        <Route path="/doctor/edit/:id" element={<EditDoctor />} />
-
-                        <Route path="/doctor/view/:id" element={<ViewDoctor />} /> */}
                         
-                        {/* <Route path="/patient" element={<PatientList />} />
-                        <Route path="/staff" element={<StaffList />} />
-                        <Route path="/appointment" element={<AppointmentList />} />
                         <Route path="/leave" element={<LeaveList />} />
-                        <Route path="/schedule" element={<ScheduleList />} /> */}
+                        <Route path="/leave/new" element={<CreateLeave />} />
+                        <Route path="/leave/edit/:id" element={<LeaveList />} />
+                        <Route path="/leave/:id" element={<ViewLeave />} />
 
                     </Route>
                 </Route>

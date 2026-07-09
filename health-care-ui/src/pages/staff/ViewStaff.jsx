@@ -5,7 +5,8 @@ import {
     Box,
     Button,
     CircularProgress,
-    Grid
+    Grid,
+    Stack
 } from "@mui/material";
 
 import PageHeader from "../../components/common/PageHeader";
@@ -15,6 +16,7 @@ import DetailItem from "../../components/common/DetailItem";
 
 import { handleApiError } from "../../utils/apiErrorHandler";
 import { getStaffById } from "../../services/staffService";
+
 
 export default function ViewStaff() {
 
@@ -70,11 +72,19 @@ export default function ViewStaff() {
     return (
 
         <>
-
             <PageHeader
                 title="Staff Details"
-                buttonText="Edit"
-                onButtonClick={() => navigate(`/staff/edit/${id}`)}
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate(`/staff/edit/${id}`)}
+                        >
+                            Edit
+                        </Button>
+
+                    </Stack>
+                }
             />
 
             <FormSection title="Personal Information">
@@ -149,7 +159,7 @@ export default function ViewStaff() {
                         label="JoiningDate"
                         value={staff.joiningDate}
                     />
-                    
+
 
                 </Grid>
 
