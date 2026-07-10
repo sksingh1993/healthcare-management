@@ -11,7 +11,7 @@ export const searchDoctors = async (searchRequest) => {
 };
 
 export const getDoctorById = async (id) => {
-
+   
     const response = await api.get(`/doctors/${id}`);
 
     return response.data;

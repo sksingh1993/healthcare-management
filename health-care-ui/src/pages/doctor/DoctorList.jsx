@@ -156,8 +156,8 @@ function DoctorList() {
             <br />
             <DoctorTable
                 doctors={doctors}
-                onView={(id) => navigate(`/doctor/${id}`)}
-                onEdit={(id) => navigate(`/doctor/edit/${id}`)}
+                onView={(doctorId) => navigate(`/doctor/${doctorId}`)}
+                onEdit={(doctorId) => navigate(`/doctor/edit/${doctorId}`)}
                 onDelete={(doctor) => {
 
                     setSelectedDoctor(doctor);

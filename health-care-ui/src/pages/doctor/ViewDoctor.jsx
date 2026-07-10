@@ -19,7 +19,7 @@ import { handleApiError } from "../../utils/apiErrorHandler";
 
 export default function ViewDoctor() {
 
-    const { id } = useParams();
+    const { doctorId } = useParams();
 
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function ViewDoctor() {
 
         try {
 
-            const response = await getDoctorById(id);
+            const response = await getDoctorById(doctorId);
 
             setDoctor(response.data);
 
@@ -79,28 +79,28 @@ export default function ViewDoctor() {
 
                         <Button
                             variant="outlined"
-                            onClick={() => navigate(`/doctor/${id}/schedule`)}
+                            onClick={() => navigate(`/doctor/${doctorId}/schedule`)}
                         >
                             Schedule
                         </Button>
 
                         <Button
                             variant="outlined"
-                            onClick={() => navigate(`/doctor/${id}/leave`)}
+                            onClick={() => navigate(`/doctor/${doctorId}/leave`)}
                         >
                             Leaves
                         </Button>
 
                         <Button
                             variant="outlined"
-                            onClick={() => navigate(`/doctor/${id}/appointment`)}
+                            onClick={() => navigate(`/doctor/${doctorId}/appointment`)}
                         >
                             Appointments
                         </Button>
 
                         <Button
                             variant="contained"
-                            onClick={() => navigate(`/doctor/edit/${id}`)}
+                            onClick={() => navigate(`/doctor/edit/${doctorId}`)}
                         >
                             Edit
                         </Button>

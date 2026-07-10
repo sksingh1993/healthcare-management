@@ -44,8 +44,8 @@ export default function AppRoutes() {
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/doctor" element={<DoctorList />} />
                         <Route path="/doctor/new" element={<CreateDoctor />} />
-                        <Route path="/doctor/:id" element={<ViewDoctor />} />
-                        <Route path="/doctor/edit/:id" element={<EditDoctor />} />
+                        <Route path="/doctor/:doctorId" element={<ViewDoctor />} />
+                        <Route path="/doctor/edit/:doctorId" element={<EditDoctor />} />
 
                         <Route path="/patient" element={<PatientList />}/>
                         <Route path="/patient/new" element={<CreatePatient />}/>
@@ -57,8 +57,8 @@ export default function AppRoutes() {
                         <Route path="/staff/edit/:id" element={<EditStaff />} />
                         <Route path="/staff/:id" element={<ViewStaff />} />
                         
-                        <Route path="/leave" element={<LeaveList />} />
-                        <Route path="/leave/new" element={<CreateLeave />} />
+                        <Route path="/doctor/:doctorId/leave" element={<LeaveList />} />
+                        <Route path="/leave/:doctorId/new" element={<CreateLeave />} />
                         <Route path="/leave/edit/:id" element={<LeaveList />} />
                         <Route path="/leave/:id" element={<ViewLeave />} />
 

@@ -16,7 +16,7 @@ import DoctorEditForm from "./DoctorEditForm";
 
 export default function EditDoctor() {
 
-    const { id } = useParams();
+    const { doctorId } = useParams();
 
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ export default function EditDoctor() {
 
             setLoading(true);
 
-            const response = await getDoctorById(id);
+            const response = await getDoctorById(doctorId);
            // console.log(response);
 
             setDoctor(response.data);

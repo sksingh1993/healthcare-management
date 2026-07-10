@@ -1,7 +1,7 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 import PageHeader from "../../components/common/PageHeader";
@@ -10,9 +10,13 @@ import AppTextField from "../../components/common/AppTextField";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 import { handleApiError } from "../../utils/apiErrorHandler";
 import { leaveSearch } from "./leaveConstant";
-import { searchLeaves } from "../../services/leaveService";
+import { deleteLeave, searchLeaves } from "../../services/leaveService";
+import LeaveTable from "../../components/leave/LeaveTable";
+import LeaveSearch from "../../components/leave/LeaveSearch";
 
 export default function LeaveList() {
+
+    const {doctorId} = useParams()
 
     const navigate = useNavigate();
 
@@ -35,6 +39,7 @@ export default function LeaveList() {
     const [selectedLeave, setSelectedLeave] = useState(null);
 
     useEffect(() => {
+        console.log("Leave for doctor id : ",doctorId);
 
         loadLeaves();
 
@@ -54,10 +59,10 @@ export default function LeaveList() {
                 ...search,
                 page,
                 size,
-                sort: "doctorCode,asc"
+                sort: "fromDate,asc"
             });
 
-            setDoctors(response.data.content);
+            setLeaves(response.data.content);
             setTotalPages(response.data.totalPages);
 
         } catch (error) {
@@ -69,7 +74,7 @@ export default function LeaveList() {
 
     const handleSearch = () => {
         setPage(0);
-        loadDoctors();
+        loadLeaves();
     };
     const handleReset = () => {
 
@@ -77,7 +82,7 @@ export default function LeaveList() {
 
         setPage(0);
 
-        loadDoctors(initialSearch, 0);
+        loadLeaves(initialSearch, 0);
 
     };
     const handleSearchChange = (event) => {
@@ -97,13 +102,13 @@ export default function LeaveList() {
             setDeleteLoading(true);
 
 
-            await deleteDoctor(selectedDoctor.id);
+            await deleteLeave(selectedLeave.id);
 
             handleClose();
 
             setDeleteDialogOpen(false);
 
-            loadDoctors();
+            loadLeaves();
 
         } catch (error) {
 
@@ -121,7 +126,7 @@ export default function LeaveList() {
 
     setDeleteDialogOpen(false);
 
-    setSelectedDoctor(null);
+    setSelectedLeave(null);
 
     document.activeElement?.blur();
 
@@ -130,13 +135,23 @@ export default function LeaveList() {
     return (
 
         <div>
+            
             <PageHeader
-                title="Doctors"
-                buttonText="Add Doctor"
-                onButtonClick={() => navigate("/doctor/new")}
+                title="Leave"
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate(`/leave/${doctorId}/new`)}
+                        >
+                            Create Leave
+                        </Button>
+
+                    </Stack>
+                }
             />
 
-            <DoctorSearch
+            <LeaveSearch
                 search={search}
                 onChange={handleSearchChange}
                 onSearch={handleSearch}
@@ -144,13 +159,13 @@ export default function LeaveList() {
             />
 
             <br />
-            <DoctorTable
-                doctors={doctors}
-                onView={(id) => navigate(`/doctor/${id}`)}
-                onEdit={(id) => navigate(`/doctor/edit/${id}`)}
-                onDelete={(doctor) => {
+            <LeaveTable
+                leaves={leaves}
+                onView={(id) => navigate(`/leave/${id}`)}
+                onEdit={(id) => navigate(`/leave/edit/${id}`)}
+                onDelete={(leave) => {
 
-                    setSelectedDoctor(doctor);
+                    setSelectedLeave(leave);
 
                     setDeleteDialogOpen(true);
 
@@ -191,8 +206,8 @@ export default function LeaveList() {
             </Button>
             <ConfirmDialog
                 open={deleteDialogOpen}
-                title="Delete Doctor"
-                message={`Are you sure you want to delete Dr. ${selectedDoctor?.fullName}?`}
+                title="Delete Leave"
+                message={`Are you sure you want to delete Dr. ${selectedLeave?.doctorName}?`}
                 loading={deleteLoading}
                 onCancel={handleClose}
                 onConfirm={handleDelete}

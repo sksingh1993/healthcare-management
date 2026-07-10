@@ -1,9 +1,9 @@
 import { removeEmptyParams } from "../utils/requestUtils";
 import api from "./axios";
 
-export const searchLeaves = async (searchRequest) => {
+export const searchLeaves = async (doctorId,searchRequest) => {
 
-    const response = await api.get("/doctors/${doctorId}/leaves", {
+    const response = await api.get(`/doctors/${doctorId}/leaves`, {
         params: removeEmptyParams(searchRequest)
     });
 
@@ -17,7 +17,7 @@ export const getLeaveById = async (id) => {
     return response.data;
 };
 
-export const createLeave = async (leaveRequest) => {
+export const createLeave = async (doctorId,leaveRequest) => {
 
     const response = await api.post("/doctors/${doctorId}/leaves", leaveRequest);
 
@@ -31,9 +31,9 @@ export const updateDoctor = async (id, leave) => {
     return response.data;
 };
 
-export const deleteDoctor = async (id) => {
+export const deleteLeave = async (id) => {
 
-    const response = await api.delete(`/doctors/${id}`);
+    const response = await api.delete(`/leaves/${id}`);
 
     return response.data;
 
