@@ -65,7 +65,7 @@ export default function EditDoctor() {
 
             setLoading(true);
 
-            await updateDoctor(id, doctor);
+            await updateDoctor(doctorId, doctor);
 
             navigate("/doctor");
 
