@@ -11,6 +11,8 @@ export default function LeaveSearch({
 
     search,
 
+    doctorId,
+
     onChange,
 
     onSearch,
@@ -27,14 +29,14 @@ export default function LeaveSearch({
             sx={{ mb: 3 }}
         >
 
-            <Grid size={{ xs: 12, md: 3 }}>
+           {!doctorId && <Grid size={{ xs: 12, md: 3 }}>
                 <AppTextField
                     label="Doctor Code"
                     name="doctorCode"
                     value={search.doctorCode}
                     onChange={onChange}
                 />
-            </Grid>
+            </Grid>}
 
             <Grid size={{ xs: 12, md: 3 }}>
                 <AppTextField

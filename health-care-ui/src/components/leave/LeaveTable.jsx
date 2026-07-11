@@ -9,7 +9,8 @@ import {
     Chip,
     IconButton,
     Stack,
-    Box
+    Box,
+    Tooltip
 } from "@mui/material";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -19,6 +20,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 export default function LeaveTable({
 
     leaves,
+
+    doctorId,
 
     onView,
 
@@ -45,6 +48,7 @@ export default function LeaveTable({
                         <TableCell>No of Day(s)</TableCell>
                         <TableCell>Leave Type</TableCell>
                         <TableCell>Status</TableCell>
+                        <TableCell>Reason</TableCell>
                         <TableCell align="center">Actions</TableCell>
 
                     </TableRow>
@@ -62,7 +66,20 @@ export default function LeaveTable({
                             <TableCell>{leave.toDate}</TableCell>
                             <TableCell>{leave.numberOfDays}</TableCell>
                             <TableCell>{leave.leaveType}</TableCell>
-                            <TableCell>{leave.reason}</TableCell>
+                            <TableCell>{leave.status}</TableCell>
+                            {/* <TableCell>{leave.reason}</TableCell> */}
+                            <TableCell
+                                sx={{
+                                    maxWidth: 200,
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis"
+                                }}
+                            >
+                                <Tooltip title={leave.reason || ""} arrow placement="top">
+                                    <span>{leave.reason}</span>
+                                </Tooltip>
+                            </TableCell>
                             <TableCell>
 
                                 <Chip
@@ -91,16 +108,16 @@ export default function LeaveTable({
                                     }}
                                 >
 
-                                    <IconButton
+                                    {/* <IconButton
                                         color="primary"
                                         onClick={() => onView(leave.id)}
                                     >
                                         <VisibilityIcon />
-                                    </IconButton>
+                                    </IconButton> */}
 
                                     <IconButton
                                         color="warning"
-                                        onClick={() => onEdit(leave.id)}
+                                        onClick={() => onEdit(doctorId, leave.id)}
                                     >
                                         <EditIcon />
                                     </IconButton>

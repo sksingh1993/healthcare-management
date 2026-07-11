@@ -38,7 +38,7 @@ export default function LeaveForm({
 
         const { name, value } = event.target;
 
-        setPatient(prev => ({
+        setLeave(prev => ({
             ...prev,
             [name]: value
         }));
@@ -62,7 +62,7 @@ export default function LeaveForm({
                 {title}
             </Typography>
 
-            <FormSection title="Personal Information">
+            <FormSection title="Leave Information">
 
                 <Grid container spacing={2}>
 

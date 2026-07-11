@@ -25,6 +25,7 @@ import ViewStaff from "../pages/staff/ViewStaff";
 import LeaveList from "../pages/leave/LeaveList";
 import CreateLeave from "../pages/leave/CreateLeave";
 import ViewLeave from "../pages/leave/ViewLeave";
+import LeaveEdit from "../pages/leave/LeaveEdit";
 
 export default function AppRoutes() {
 
@@ -58,7 +59,8 @@ export default function AppRoutes() {
                         <Route path="/staff/:id" element={<ViewStaff />} />
                         
                         <Route path="/doctor/:doctorId/leave" element={<LeaveList />} />
-                        <Route path="/leave/:doctorId/new" element={<CreateLeave />} />
+                        <Route path="/doctor/:doctorId/leave/new" element={<CreateLeave />} />
+                        <Route path="/doctor/:doctorId/leave/edit/:leaveId" element={<LeaveEdit />} />
                         <Route path="/leave/edit/:id" element={<LeaveList />} />
                         <Route path="/leave/:id" element={<ViewLeave />} />
 

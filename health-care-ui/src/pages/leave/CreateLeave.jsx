@@ -40,7 +40,7 @@ const handleSave = async () => {
 
         toast.success(response.message);
 
-        navigate(`/doctor/${id}/leave`);
+        navigate(`/doctor/${doctorId}/leave`);
 
     } catch (error) {
 

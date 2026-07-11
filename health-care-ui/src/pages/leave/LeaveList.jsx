@@ -9,7 +9,7 @@ import AppTextField from "../../components/common/AppTextField";
 
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 import { handleApiError } from "../../utils/apiErrorHandler";
-import { leaveSearch } from "./leaveConstant";
+import { initialLeave, leaveSearch } from "./leaveConstant";
 import { deleteLeave, searchLeaves } from "../../services/leaveService";
 import LeaveTable from "../../components/leave/LeaveTable";
 import LeaveSearch from "../../components/leave/LeaveSearch";
@@ -39,7 +39,7 @@ export default function LeaveList() {
     const [selectedLeave, setSelectedLeave] = useState(null);
 
     useEffect(() => {
-        console.log("Leave for doctor id : ",doctorId);
+        //console.log("Leave for doctor id : ",doctorId);
 
         loadLeaves();
 
@@ -47,7 +47,7 @@ export default function LeaveList() {
 
     useEffect(() => {
         loadLeaves();
-    }, [page]);
+    }, [search,page]);
 
     const loadLeaves = async () => {
 
@@ -55,17 +55,18 @@ export default function LeaveList() {
 
             setLoading(true);
 
-            const response = await searchLeaves({
+            const response = await searchLeaves(doctorId,{
                 ...search,
                 page,
                 size,
                 sort: "fromDate,asc"
             });
-
+            //console.log("Leave search in leave list")
             setLeaves(response.data.content);
             setTotalPages(response.data.totalPages);
 
         } catch (error) {
+            //console.log("Exception in lieave search,",error)
             handleApiError(error);
         } finally {
             setLoading(false)
@@ -78,11 +79,12 @@ export default function LeaveList() {
     };
     const handleReset = () => {
 
-        setSearch(initialSearch);
+        setSearch(leaveSearch);
 
         setPage(0);
 
-        loadLeaves(initialSearch, 0);
+        loadLeaves(leaveSearch, 0);
+        console.log(search)
 
     };
     const handleSearchChange = (event) => {
@@ -98,11 +100,11 @@ export default function LeaveList() {
     const handleDelete = async () => {
 
         try {
-
+            console.log(leaves)
             setDeleteLoading(true);
 
 
-            await deleteLeave(selectedLeave.id);
+            await deleteLeave(doctorId,selectedLeave.id);
 
             handleClose();
 
@@ -142,7 +144,7 @@ export default function LeaveList() {
                     <Stack direction="row" spacing={1}>
                         <Button
                             variant="contained"
-                            onClick={() => navigate(`/leave/${doctorId}/new`)}
+                            onClick={() => navigate(`/doctor/${doctorId}/leave/new`)}
                         >
                             Create Leave
                         </Button>
@@ -153,6 +155,7 @@ export default function LeaveList() {
 
             <LeaveSearch
                 search={search}
+                doctorId={doctorId}
                 onChange={handleSearchChange}
                 onSearch={handleSearch}
                 onReset={handleReset}
@@ -161,8 +164,9 @@ export default function LeaveList() {
             <br />
             <LeaveTable
                 leaves={leaves}
+                doctorId={doctorId}
                 onView={(id) => navigate(`/leave/${id}`)}
-                onEdit={(id) => navigate(`/leave/edit/${id}`)}
+                onEdit={(doctorId,leaveId) => navigate(`/doctor/${doctorId}/leave/edit/${leaveId}`)}
                 onDelete={(leave) => {
 
                     setSelectedLeave(leave);
@@ -207,7 +211,7 @@ export default function LeaveList() {
             <ConfirmDialog
                 open={deleteDialogOpen}
                 title="Delete Leave"
-                message={`Are you sure you want to delete Dr. ${selectedLeave?.doctorName}?`}
+                message={`Are you sure you want to delete ${selectedLeave?.leaveType} leave of Dr. ${selectedLeave?.doctorName}?`}
                 loading={deleteLoading}
                 onCancel={handleClose}
                 onConfirm={handleDelete}
