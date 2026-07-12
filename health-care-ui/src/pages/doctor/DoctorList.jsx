@@ -42,7 +42,7 @@ function DoctorList() {
 
     useEffect(() => {
         loadDoctors();
-    }, [page]);
+    }, [search,page]);
 
     const loadDoctors = async () => {
 

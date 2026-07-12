@@ -1,7 +1,7 @@
 import { removeEmptyParams } from "../utils/requestUtils";
 import api from "./axios";
 
-export const searchLeaves = async (doctorId,searchRequest) => {
+export const searchLeavesForDoctors = async (doctorId,searchRequest) => {
     const request = removeEmptyParams(searchRequest)
    
     const response = await api.get(`/doctors/${doctorId}/leaves`, {
@@ -10,7 +10,15 @@ export const searchLeaves = async (doctorId,searchRequest) => {
    
     return response.data;
 };
-
+export const searchLeaves = async (searchRequest) => {
+    const request = removeEmptyParams(searchRequest)
+   
+    const response = await api.get("/leaves", {
+        params: removeEmptyParams(searchRequest)
+    });
+   
+    return response.data;
+};
 export const getLeaveById = async (doctorId,leaveId) => {
 
     const response = await api.get(`/doctors/${doctorId}/leaves/${leaveId}`);

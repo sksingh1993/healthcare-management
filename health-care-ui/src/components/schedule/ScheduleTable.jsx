@@ -17,9 +17,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function LeaveTable({
+export default function ScheduleTable({
 
-    leaves,
+    schedules,
 
     doctorId,
 
@@ -40,15 +40,12 @@ export default function LeaveTable({
                 <TableHead>
 
                     <TableRow>
-
-                        <TableCell>Code</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell>From Date</TableCell>
-                        <TableCell>To Date</TableCell>
-                        <TableCell>No of Day(s)</TableCell>
-                        <TableCell>Leave Type</TableCell>
-                        <TableCell>Status</TableCell>
-                        <TableCell>Reason</TableCell>
+                        {!doctorId && <TableCell>Dr. Name</TableCell>}
+                        <TableCell>Day of Week</TableCell>
+                        <TableCell>Start Time</TableCell>
+                        <TableCell>End Time</TableCell>
+                        <TableCell>Slot Duration</TableCell>
+                        <TableCell>Consultation Limit</TableCell>
                         <TableCell align="center">Actions</TableCell>
 
                     </TableRow>
@@ -57,30 +54,32 @@ export default function LeaveTable({
 
                 <TableBody>
 
-                    {leaves.map((leave) => (
+                    {schedules.map((schedule) => (
 
-                        <TableRow key={leave.id} hover>
-                            <TableCell>{leave.doctorCode}</TableCell>
-                            <TableCell>{leave.doctorName}</TableCell>
-                            <TableCell>{leave.fromDate}</TableCell>
-                            <TableCell>{leave.toDate}</TableCell>
-                            <TableCell>{leave.numberOfDays}</TableCell>
-                            <TableCell>{leave.leaveType}</TableCell>
-                            <TableCell>{leave.status}</TableCell>
-                            {/* <TableCell>{leave.reason}</TableCell> */}
-                            <TableCell
-                                sx={{
-                                    maxWidth: 200,
-                                    whiteSpace: "nowrap",
-                                    overflow: "hidden",
-                                    textOverflow: "ellipsis"
-                                }}
-                            >
-                                <Tooltip title={leave.reason || ""} arrow placement="top">
-                                    <span>{leave.reason}</span>
-                                </Tooltip>
+                        <TableRow key={schedule.id} hover>
+                            {!doctorId && <TableCell>{schedule.doctorName}</TableCell>}
+                            <TableCell>{schedule.dayOfWeek}</TableCell>
+                            <TableCell>{schedule.startTime}</TableCell>
+                            <TableCell>{schedule.endTime}</TableCell>
+                            <TableCell>{schedule.slotDuration}</TableCell>
+                            <TableCell>{schedule.consultationLimit}</TableCell>
+                            <TableCell>
+
+                                <Chip
+                                    label={
+                                        schedule.active
+                                            ? "Active"
+                                            : "Inactive"
+                                    }
+                                    color={
+                                        schedule.active
+                                            ? "success"
+                                            : "error"
+                                    }
+                                    size="small"
+                                />
+
                             </TableCell>
-                            
 
                             <TableCell align="center">
 
@@ -101,14 +100,14 @@ export default function LeaveTable({
 
                                     <IconButton
                                         color="warning"
-                                        onClick={() => onEdit(doctorId, leave.id)}
+                                        onClick={() => onEdit(doctorId, schedule.id)}
                                     >
                                         <EditIcon />
                                     </IconButton>
 
                                     <IconButton
                                         color="error"
-                                        onClick={() => onDelete(leave)}
+                                        onClick={() => onDelete(schedule)}
                                     >
                                         <DeleteIcon />
                                     </IconButton>

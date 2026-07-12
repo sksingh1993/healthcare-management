@@ -13,14 +13,18 @@ import AppTextField from "../../components/common/AppTextField";
 import FormSection from "../../components/common/FormSection";
 
 // Constants
+import { GENDERS } from "../../constants/gender";
+import { BLOOD_GROUP } from "../../constants/bloodGroup";
 import { LEAVE_TYPE } from "../../constants/leaveType";
+import { DAY_OF_WEEK } from "../../constants/dayOfWeek";
 
-export default function LeaveForm({
+export default function ScheduleEditForm({
 
     title,
-    leave,
 
-    setLeave,
+    schedule,
+
+    setSchedule,
     setErrors,
 
     errors,
@@ -35,11 +39,12 @@ export default function LeaveForm({
 
 }) {
 
+    //console.log("ScheduleEditForm errors:", errors);
     const handleChange = (event) => {
 
         const { name, value } = event.target;
 
-        setLeave(prev => ({
+        setSchedule(prev => ({
             ...prev,
             [name]: value
         }));
@@ -62,55 +67,26 @@ export default function LeaveForm({
             >
                 {title}
             </Typography>
-            {errors.leave && (
+            {errors.schedule && (
                 <Alert severity="error" sx={{ mb: 2 }}>
-                    {errors.leave}
+                    {errors.schedule}
                 </Alert>
             )}
 
-            <FormSection title="Leave Information">
+
+            <FormSection title="Schedule Information">
 
                 <Grid container spacing={2}>
-
-
-                    <Grid size={{ xs: 12, md: 6 }}>
-
-                        <AppTextField
-                            label="From Date"
-                            name="fromDate"
-                            type="date"
-                            value={leave.fromDate || ""}
-                            onChange={handleChange}
-                            error={errors.fromDate}
-                            helperText={errors.fromDate}
-                            required
-                        />
-
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-
-                        <AppTextField
-                            label="To Date"
-                            name="toDate"
-                            type="date"
-                            value={leave.toDate || ""}
-                            onChange={handleChange}
-                            error={errors.toDate}
-                            helperText={errors.toDate}
-                            required
-                        />
-
-                    </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
 
                         <AppSelect
-                            label="Leave Type"
-                            name="leaveType"
-                            value={leave.leaveType}
+                            label="Day Of Week"
+                            name="dayOfWeek"
+                            value={schedule.dayOfWeek}
                             onChange={handleChange}
-                            options={LEAVE_TYPE}
-                            error={errors.leaveType}
-                            helperText={errors.leaveType}
+                            options={DAY_OF_WEEK}
+                            error={errors.dayOfWeek}
+                            helperText={errors.dayOfWeek}
                             required
                         />
 
@@ -118,27 +94,72 @@ export default function LeaveForm({
                     <Grid size={{ xs: 12, md: 6 }}>
 
                         <AppTextField
+                            label="Slot Duration"
+                            name="slotDuration"
+                            type="number"
+                            value={schedule.slotDuration || ""}
+                            onChange={handleChange}
+                            error={errors.slotDuration}
+                            helperText={errors.slotDuration}
+                            required
+                        />
 
-                            label="Reason"
+                    </Grid>
 
-                            name="reason"
+                    <Grid size={{ xs: 12, md: 6 }}>
 
-                            value={leave.reason}
+                        <AppTextField
+                            label="Start Time"
+                            name="startTime"
+                            type="time"
+                            value={schedule.startTime || ""}
+                            onChange={handleChange}
+                            error={errors.startTime}
+                            helperText={errors.startTime}
+                            required
+                        />
+
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+
+                        <AppTextField
+                            label="End Time"
+                            name="endTime"
+                            type="time"
+                            value={schedule.endTime || ""}
+                            onChange={handleChange}
+                            error={errors.endTime}
+                            helperText={errors.endTime}
+                            required
+                        />
+
+                    </Grid>
+
+
+                    <Grid size={{ xs: 12, md: 6 }}>
+
+                        <AppTextField
+
+                            label="Consultation Limit"
+
+                            name="consultationLimit"
+
+                            value={schedule.consultationLimit}
 
                             onChange={handleChange}
 
-                            error={errors.reason}
+                            error={errors.consultationLimit}
 
-                            helperText={errors.reason}
+                            helperText={errors.consultationLimit}
 
                             required
 
                         />
 
                     </Grid>
+
                 </Grid>
             </FormSection>
-
 
             <Box
                 sx={{

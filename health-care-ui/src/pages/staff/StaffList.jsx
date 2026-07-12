@@ -47,7 +47,7 @@ export default function StaffList() {
 
     useEffect(() => {
         loadStaffs();
-    }, [page]);
+    }, [search,page]);
 
     const loadStaffs = async () => {
 

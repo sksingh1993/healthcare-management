@@ -26,7 +26,7 @@ function PatientList() {
     }, [])
     useEffect(() => {
         loadPatients();
-    }, [page]);
+    }, [search,page]);
     const loadPatients = async () => {
         try {
             setLoading(true);

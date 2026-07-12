@@ -18,6 +18,8 @@ const initialLeaveEdit = {
 };
 
 export const leaveSearch = {
+
+    doctorName:"",
     
     doctorCode:"",
 

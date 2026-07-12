@@ -10,13 +10,15 @@ import AppTextField from "../../components/common/AppTextField";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 import { handleApiError } from "../../utils/apiErrorHandler";
 import { initialLeave, leaveSearch } from "./leaveConstant";
-import { deleteLeave, searchLeaves } from "../../services/leaveService";
+import { deleteLeave, searchLeaves, searchLeavesForDoctors } from "../../services/leaveService";
 import LeaveTable from "../../components/leave/LeaveTable";
 import LeaveSearch from "../../components/leave/LeaveSearch";
 
 export default function LeaveList() {
 
     const {doctorId} = useParams()
+    console.log("URL:", window.location.pathname);
+console.log("doctorId:", doctorId);
 
     const navigate = useNavigate();
 
@@ -55,7 +57,8 @@ export default function LeaveList() {
 
             setLoading(true);
 
-            const response = await searchLeaves(doctorId,{
+            if(doctorId){
+                const response = await searchLeavesForDoctors(doctorId,{
                 ...search,
                 page,
                 size,
@@ -65,6 +68,19 @@ export default function LeaveList() {
             setLeaves(response.data.content);
             setTotalPages(response.data.totalPages);
 
+            }else{
+                const response = await searchLeaves({
+                ...search,
+                page,
+                size,
+                sort: "fromDate,asc"
+            });
+            //console.log("Leave search in leave list")
+            setLeaves(response.data.content);
+            setTotalPages(response.data.totalPages);
+            }
+
+            
         } catch (error) {
             //console.log("Exception in lieave search,",error)
             handleApiError(error);
@@ -137,11 +153,12 @@ export default function LeaveList() {
     return (
 
         <div>
+       {console.log("doctorId",doctorId)}
             
             <PageHeader
                 title="Leave"
                 actions={
-                    <Stack direction="row" spacing={1}>
+                    doctorId ? (<Stack direction="row" spacing={1}>
                         <Button
                             variant="contained"
                             onClick={() => navigate(`/doctor/${doctorId}/leave/new`)}
@@ -149,7 +166,7 @@ export default function LeaveList() {
                             Create Leave
                         </Button>
 
-                    </Stack>
+                    </Stack>):null
                 }
             />
 
