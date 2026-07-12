@@ -43,15 +43,13 @@ export default function ScheduleList() {
     const [selectedSchedule, setSelectedSchedule] = useState(null);
 
     useEffect(() => {
-        //console.log("Leave for doctor id : ",doctorId);
-
-        loadSchedules();
-
-    }, []);
+        setSearch(scheduleSearch);
+        setPage(0);
+    }, [doctorId]);
 
     useEffect(() => {
         loadSchedules();
-    }, [search, page]);
+    }, [search, page,doctorId]);
 
     const loadSchedules = async () => {
 

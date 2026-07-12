@@ -16,9 +16,9 @@ import LeaveSearch from "../../components/leave/LeaveSearch";
 
 export default function LeaveList() {
 
-    const {doctorId} = useParams()
+    const { doctorId } = useParams()
     console.log("URL:", window.location.pathname);
-console.log("doctorId:", doctorId);
+    console.log("doctorId:", doctorId);
 
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ console.log("doctorId:", doctorId);
     const [loading, setLoading] = useState(false);
 
     const [search, setSearch] = useState(leaveSearch);
-  
+
 
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -41,15 +41,13 @@ console.log("doctorId:", doctorId);
     const [selectedLeave, setSelectedLeave] = useState(null);
 
     useEffect(() => {
-        //console.log("Leave for doctor id : ",doctorId);
-
-        loadLeaves();
-
-    }, []);
-
+        setSearch(leaveSearch);
+        setPage(0);
+    }, [doctorId]);
+    
     useEffect(() => {
         loadLeaves();
-    }, [search,page]);
+    }, [search, page, doctorId]);
 
     const loadLeaves = async () => {
 
@@ -57,30 +55,30 @@ console.log("doctorId:", doctorId);
 
             setLoading(true);
 
-            if(doctorId){
-                const response = await searchLeavesForDoctors(doctorId,{
-                ...search,
-                page,
-                size,
-                sort: "fromDate,asc"
-            });
-            //console.log("Leave search in leave list")
-            setLeaves(response.data.content);
-            setTotalPages(response.data.totalPages);
+            if (doctorId) {
+                const response = await searchLeavesForDoctors(doctorId, {
+                    ...search,
+                    page,
+                    size,
+                    sort: "fromDate,asc"
+                });
+                //console.log("Leave search in leave list")
+                setLeaves(response.data.content);
+                setTotalPages(response.data.totalPages);
 
-            }else{
+            } else {
                 const response = await searchLeaves({
-                ...search,
-                page,
-                size,
-                sort: "fromDate,asc"
-            });
-            //console.log("Leave search in leave list")
-            setLeaves(response.data.content);
-            setTotalPages(response.data.totalPages);
+                    ...search,
+                    page,
+                    size,
+                    sort: "fromDate,asc"
+                });
+                //console.log("Leave search in leave list")
+                setLeaves(response.data.content);
+                setTotalPages(response.data.totalPages);
             }
 
-            
+
         } catch (error) {
             //console.log("Exception in lieave search,",error)
             handleApiError(error);
@@ -94,13 +92,13 @@ console.log("doctorId:", doctorId);
         loadLeaves();
     };
     const handleReset = () => {
-
         setSearch(leaveSearch);
-
         setPage(0);
 
-        loadLeaves(leaveSearch, 0);
-        console.log(search)
+        // setSearch(leaveSearch);
+        // setPage(0);
+        // loadLeaves(leaveSearch, 0);
+        // console.log(search)
 
     };
     const handleSearchChange = (event) => {
@@ -120,7 +118,7 @@ console.log("doctorId:", doctorId);
             setDeleteLoading(true);
 
 
-            await deleteLeave(doctorId,selectedLeave.id);
+            await deleteLeave(doctorId, selectedLeave.id);
 
             handleClose();
 
@@ -142,19 +140,19 @@ console.log("doctorId:", doctorId);
     };
     const handleClose = () => {
 
-    setDeleteDialogOpen(false);
+        setDeleteDialogOpen(false);
 
-    setSelectedLeave(null);
+        setSelectedLeave(null);
 
-    document.activeElement?.blur();
+        document.activeElement?.blur();
 
-};
+    };
 
     return (
 
         <div>
-       {console.log("doctorId",doctorId)}
-            
+            {console.log("doctorId", doctorId)}
+
             <PageHeader
                 title="Leave"
                 actions={
@@ -166,7 +164,7 @@ console.log("doctorId:", doctorId);
                             Create Leave
                         </Button>
 
-                    </Stack>):null
+                    </Stack>) : null
                 }
             />
 
@@ -183,7 +181,7 @@ console.log("doctorId:", doctorId);
                 leaves={leaves}
                 doctorId={doctorId}
                 onView={(id) => navigate(`/leave/${id}`)}
-                onEdit={(doctorId,leaveId) => navigate(`/doctor/${doctorId}/leave/edit/${leaveId}`)}
+                onEdit={(doctorId, leaveId) => navigate(`/doctor/${doctorId}/leave/edit/${leaveId}`)}
                 onDelete={(leave) => {
 
                     setSelectedLeave(leave);

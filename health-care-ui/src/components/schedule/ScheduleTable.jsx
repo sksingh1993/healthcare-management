@@ -44,8 +44,9 @@ export default function ScheduleTable({
                         <TableCell>Day of Week</TableCell>
                         <TableCell>Start Time</TableCell>
                         <TableCell>End Time</TableCell>
-                        <TableCell>Slot Duration</TableCell>
-                        <TableCell>Consultation Limit</TableCell>
+                        <TableCell align="center">Slot Duration</TableCell>
+                        <TableCell align="center">Consultation Limit</TableCell>
+                        <TableCell>Status</TableCell>
                         <TableCell align="center">Actions</TableCell>
 
                     </TableRow>
@@ -61,8 +62,8 @@ export default function ScheduleTable({
                             <TableCell>{schedule.dayOfWeek}</TableCell>
                             <TableCell>{schedule.startTime}</TableCell>
                             <TableCell>{schedule.endTime}</TableCell>
-                            <TableCell>{schedule.slotDuration}</TableCell>
-                            <TableCell>{schedule.consultationLimit}</TableCell>
+                            <TableCell align="center">{schedule.slotDuration}</TableCell>
+                            <TableCell align="center">{schedule.consultationLimit}</TableCell>
                             <TableCell>
 
                                 <Chip
