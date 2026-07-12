@@ -5,7 +5,8 @@ import {
     Box,
     Button,
     CircularProgress,
-    Grid
+    Grid,
+    Stack
 } from "@mui/material";
 
 import PageHeader from "../../components/common/PageHeader";
@@ -14,6 +15,7 @@ import DetailItem from "../../components/common/DetailItem";
 
 import { getPatientById } from "../../services/patientService";
 import { handleApiError } from "../../utils/apiErrorHandler";
+
 
 export default function ViewPatient() {
 
@@ -69,61 +71,64 @@ export default function ViewPatient() {
 
         <>
 
-            {/* <PageHeader title="Doctor Details" /> */}
             <PageHeader
                 title="Patient Details"
-                buttonText="Edit"
-                onButtonClick={() => navigate(`/patient/edit/${id}`)}
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate(`/patient/edit/${id}`)}
+                        >
+                            Edit
+                        </Button>
+
+                    </Stack>
+                }
             />
+
 
             <FormSection title="Personal Information">
 
                 <Grid container spacing={2}>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Patient Code"
+                            value={patient.patientCode}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="First Name"
+                            value={patient.firstName}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Last Name"
+                            value={patient.lastName}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Gender"
+                            value={patient.gender}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Age"
+                            value={patient.age}
+                        />
+                    </Grid>
 
-                    <DetailItem
-                        label="Patient Code"
-                        value={patient.patientCode}
-                    />
 
-                    <DetailItem
-                        label="First Name"
-                        value={patient.firstName}
-                    />
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Status"
+                            value={patient.active ? "Active" : "Inactive"}
+                        />
+                    </Grid>
 
-                    <DetailItem
-                        label="Last Name"
-                        value={patient.lastName}
-                    />
-
-                    <DetailItem
-                        label="Gender"
-                        value={patient.gender}
-                    />
-
-                    <DetailItem
-                        label="Age"
-                        value={patient.age}
-                    />
-
-                    <DetailItem
-                        label="Mobile"
-                        value={patient.mobile}
-                    />
-
-                    <DetailItem
-                        label="Email"
-                        value={patient.email}
-                    />
-
-                    <DetailItem
-                        label="Bood Group"
-                        value={patient.bloodGroup}
-                    />
-
-                    <DetailItem
-                        label="Status"
-                        value={patient.active ? "Active" : "Inactive"}
-                    />
 
                 </Grid>
 
@@ -132,43 +137,63 @@ export default function ViewPatient() {
             <FormSection title="Health Information">
 
                 <Grid container spacing={2}>
-
-                    <DetailItem
-                        label="Allergies"
-                        value={patient.allergies}
-                    />
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Allergies"
+                            value={patient.allergies}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Bood Group"
+                            value={patient.bloodGroup}
+                        />
+                    </Grid>
                 </Grid>
-
             </FormSection>
 
-            <FormSection title="Address">
+            <FormSection title="Contact Details">
 
                 <Grid container spacing={2}>
+                    <Grid size={{ xs: 10, md: 1.5 }}>
+                        <DetailItem
+                            label="Mobile"
+                            value={patient.mobile}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 2 }}>
+                        <DetailItem
+                            label="Email"
+                            value={patient.email}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 10, md: 3 }}>
+                        <DetailItem
+                            label="Address"
+                            value={patient.address}
+                        />
+                    </Grid>
+                
 
-                    <DetailItem
-                        label="Address"
-                        value={patient.address}
-                    />
 
-                </Grid>
-                <Grid container spacing={2}>
 
+                <Grid size={{ xs: 10, md: 2.5 }}>
                     <DetailItem
                         label="Emergency Contact Name"
                         value={patient.emergencyContactName}
                     />
-
                 </Grid>
-                <Grid container spacing={2}>
 
+
+                <Grid size={{ xs: 10, md: 2.5 }}>
                     <DetailItem
                         label="Emergency Contact Number"
                         value={patient.emergencyContactNumber}
                     />
-
                 </Grid>
+            </Grid>
 
-            </FormSection>
+        </FormSection >
 
             <Box
                 sx={{

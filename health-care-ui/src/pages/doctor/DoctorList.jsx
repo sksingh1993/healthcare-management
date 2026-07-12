@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ function DoctorList() {
     const [loading, setLoading] = useState(false);
 
     const [search, setSearch] = useState(initialSearch);
-  
+
 
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -42,7 +42,7 @@ function DoctorList() {
 
     useEffect(() => {
         loadDoctors();
-    }, [page]);
+    }, [search,page]);
 
     const loadDoctors = async () => {
 
@@ -69,7 +69,10 @@ function DoctorList() {
 
     const handleSearch = () => {
         setPage(0);
-        loadDoctors();
+       
+            loadDoctors();
+    
+        
     };
     const handleReset = () => {
 
@@ -83,6 +86,7 @@ function DoctorList() {
     const handleSearchChange = (event) => {
 
         const { name, value } = event.target;
+        setPage(0);
         console.log(event.target);
         setSearch(prev => ({
             ...prev,
@@ -119,21 +123,31 @@ function DoctorList() {
     };
     const handleClose = () => {
 
-    setDeleteDialogOpen(false);
+        setDeleteDialogOpen(false);
 
-    setSelectedDoctor(null);
+        setSelectedDoctor(null);
 
-    document.activeElement?.blur();
+        document.activeElement?.blur();
 
-};
+    };
 
     return (
 
         <div>
+
             <PageHeader
                 title="Doctors"
-                buttonText="Add Doctor"
-                onButtonClick={() => navigate("/doctor/new")}
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate("/doctor/new")}
+                        >
+                            Add Doctor
+                        </Button>
+
+                    </Stack>
+                }
             />
 
             <DoctorSearch
@@ -146,8 +160,8 @@ function DoctorList() {
             <br />
             <DoctorTable
                 doctors={doctors}
-                onView={(id) => navigate(`/doctor/${id}`)}
-                onEdit={(id) => navigate(`/doctor/edit/${id}`)}
+                onView={(doctorId) => navigate(`/doctor/${doctorId}`)}
+                onEdit={(doctorId) => navigate(`/doctor/edit/${doctorId}`)}
                 onDelete={(doctor) => {
 
                     setSelectedDoctor(doctor);

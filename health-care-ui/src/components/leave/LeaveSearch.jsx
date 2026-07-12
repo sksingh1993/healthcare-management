@@ -5,13 +5,13 @@ import {
 
 import AppTextField from "../common/AppTextField";
 import AppSelect from "../common/AppSelect";
+import { LEAVE_TYPE } from "../../constants/leaveType";
 
-import { ROLE_TYPE } from "../../constants/roleType";
-import { DEPARTMENT } from "../../constants/department";
-
-export default function StaffSearch({
+export default function LeaveSearch({
 
     search,
+
+    doctorId,
 
     onChange,
 
@@ -29,30 +29,40 @@ export default function StaffSearch({
             sx={{ mb: 3 }}
         >
 
-            <Grid size={{ xs: 12, md: 3 }}>
+           {!doctorId && <Grid size={{ xs: 12, md: 3 }}>
                 <AppTextField
-                    label="Employee Code"
-                    name="employeeCode"
-                    value={search.employeeCode}
+                    label="Doctor Name"
+                    name="doctorName"
+                    value={search.doctorName}
                     onChange={onChange}
                 />
-            </Grid>
+            </Grid>}
 
             <Grid size={{ xs: 12, md: 3 }}>
                 <AppTextField
-                    label="Employee Name"
-                    name="firstName"
-                    value={search.firstName}
+                    label="From Date"
+                    name="fromDate"
+                    type="date"
+                    value={search.fromDate}
+                    onChange={onChange}
+                />
+            </Grid>
+            <Grid size={{ xs: 12, md: 3 }}>
+                <AppTextField
+                    label="To Date"
+                    name="toDate"
+                    type="date"
+                    value={search.toDate}
                     onChange={onChange}
                 />
             </Grid>
 
             <Grid size={{ xs: 12, md: 3 }}>
                 <AppSelect
-                    label="Department"
-                    name="department"
-                    value={search.department}
-                    options={DEPARTMENT}
+                    label="leaveType"
+                    name="leaveType"
+                    value={search.leaveType}
+                    options={LEAVE_TYPE}
                     onChange={onChange}
                 />
             </Grid>

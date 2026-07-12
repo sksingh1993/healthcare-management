@@ -1,11 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Box, Typography } from "@mui/material";
 
 export default function PageHeader({
     title,
-    buttonText,
-    onButtonClick,
-    showButton = true
+    actions
 }) {
 
     return (
@@ -26,17 +23,7 @@ export default function PageHeader({
                 {title}
             </Typography>
 
-            {
-                showButton &&
-
-                <Button
-                    variant="contained"
-                    startIcon={<AddIcon />}
-                    onClick={onButtonClick}
-                >
-                    {buttonText}
-                </Button>
-            }
+            {actions}
 
         </Box>
 

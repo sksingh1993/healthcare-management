@@ -7,7 +7,7 @@ import { deletePatient, searchPatient } from "../../services/patientService";
 import PatientTable from "../../components/patient/PatientTable";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 import { handleApiError } from "../../utils/apiErrorHandler";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 
 function PatientList() {
     const navigate = useNavigate();
@@ -18,37 +18,37 @@ function PatientList() {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-     const [deleteLoading, setDeleteLoading] = useState(false);
-     const [loading, setLoading] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         loadPatients();
     }, [])
-  useEffect(() => {
+    useEffect(() => {
         loadPatients();
-    }, [page]);
+    }, [search,page]);
     const loadPatients = async () => {
-        try{
+        try {
             setLoading(true);
             const response = await searchPatient(
-            {
-                ...search,
-                page,
-                size,
-                sort: "patientCode,asc"
-            }
-        );
-        console.log(response.data.content);
-         setPatients(response.data.content)
-         setTotalPages(response.data.totalPages)
-        }catch (error) {
+                {
+                    ...search,
+                    page,
+                    size,
+                    sort: "patientCode,asc"
+                }
+            );
+            console.log(response.data.content);
+            setPatients(response.data.content)
+            setTotalPages(response.data.totalPages)
+        } catch (error) {
             handleApiError(error);
         } finally {
             setLoading(false)
         }
-        
 
-       
+
+
     }
 
     const handleSearch = () => {
@@ -59,12 +59,13 @@ function PatientList() {
 
     const handleSearchChange = (event) => {
         console.log("Handle Search")
-        const {name, value} = event.target;
+        const { name, value } = event.target;
+        setPage(0);
         console.log(event.target.value)
         setSearch(prev => ({
-                ...prev,
-                [name]: value
-            }
+            ...prev,
+            [name]: value
+        }
         ))
     }
 
@@ -77,16 +78,16 @@ function PatientList() {
         loadPatients(patientInitialSearch, 0);
 
     };
-     const handleClose = () => {
+    const handleClose = () => {
 
-    setDeleteDialogOpen(false);
+        setDeleteDialogOpen(false);
 
-    setSelectedPatient(null);
+        setSelectedPatient(null);
 
-    document.activeElement?.blur();
+        document.activeElement?.blur();
 
-};
-   const handleDelete = async () => {
+    };
+    const handleDelete = async () => {
 
         try {
 
@@ -105,22 +106,32 @@ function PatientList() {
 
 
             handleApiError(error);
-            
+
 
         } finally {
 
             setDeleteLoading(false);
-            
+
 
         }
 
     };
     return (
         <div>
+            
             <PageHeader
-                title="Patient"
-                buttonText="Add Patient"
-                onButtonClick={() => navigate("/patient/new")}
+                title="Doctors"
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate("/patient/new")}
+                        >
+                            Add Patient
+                        </Button>
+
+                    </Stack>
+                }
             />
 
             <PatientSearch
@@ -151,7 +162,7 @@ function PatientList() {
                 onClick={() => setPage(page + 1)}>
                 Next
             </Button>
-           
+
             <ConfirmDialog
                 open={deleteDialogOpen}
                 title="Delete Patient"
@@ -160,7 +171,7 @@ function PatientList() {
                 onCancel={handleClose}
                 onConfirm={handleDelete}
             />
-           
+
 
         </div>
     )

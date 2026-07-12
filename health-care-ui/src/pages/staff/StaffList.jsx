@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,7 @@ export default function StaffList() {
     const [loading, setLoading] = useState(false);
 
     const [search, setSearch] = useState(staffSearch);
-  
+
 
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -47,14 +47,14 @@ export default function StaffList() {
 
     useEffect(() => {
         loadStaffs();
-    }, [page]);
+    }, [search,page]);
 
     const loadStaffs = async () => {
 
         try {
 
             setLoading(true);
-            
+
 
             const response = await searchStaffs({
                 ...search,
@@ -89,6 +89,7 @@ export default function StaffList() {
     const handleSearchChange = (event) => {
 
         const { name, value } = event.target;
+        setPage(0);
         console.log(event.target);
         setSearch(prev => ({
             ...prev,
@@ -125,21 +126,32 @@ export default function StaffList() {
     };
     const handleClose = () => {
 
-    setDeleteDialogOpen(false);
+        setDeleteDialogOpen(false);
 
-    setSelectedStaff(null);
+        setSelectedStaff(null);
 
-    document.activeElement?.blur();
+        document.activeElement?.blur();
 
-};
+    };
 
     return (
 
         <div>
+
+
             <PageHeader
                 title="Staffs"
-                buttonText="Add Staff"
-                onButtonClick={() => navigate("/staff/new")}
+                actions={
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate("/staff/new")}
+                        >
+                            Add Employee
+                        </Button>
+
+                    </Stack>
+                }
             />
 
             <StaffSearch

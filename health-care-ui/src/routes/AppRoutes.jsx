@@ -22,6 +22,13 @@ import StaffList from "../pages/staff/StaffList";
 import CreateStaff from "../pages/staff/CreateStaff";
 import EditStaff from "../pages/staff/EditStaff";
 import ViewStaff from "../pages/staff/ViewStaff";
+import LeaveList from "../pages/leave/LeaveList";
+import CreateLeave from "../pages/leave/CreateLeave";
+import ViewLeave from "../pages/leave/ViewLeave";
+import LeaveEdit from "../pages/leave/LeaveEdit";
+import ScheduleList from "../pages/schedule/ScheduleList";
+import CreateSchedule from "../pages/schedule/CreateSchedule";
+import ScheduleEdit from "../pages/schedule/ScheduleEdit";
 
 export default function AppRoutes() {
 
@@ -41,8 +48,8 @@ export default function AppRoutes() {
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/doctor" element={<DoctorList />} />
                         <Route path="/doctor/new" element={<CreateDoctor />} />
-                        <Route path="/doctor/:id" element={<ViewDoctor />} />
-                        <Route path="/doctor/edit/:id" element={<EditDoctor />} />
+                        <Route path="/doctor/:doctorId" element={<ViewDoctor />} />
+                        <Route path="/doctor/edit/:doctorId" element={<EditDoctor />} />
 
                         <Route path="/patient" element={<PatientList />}/>
                         <Route path="/patient/new" element={<CreatePatient />}/>
@@ -53,21 +60,18 @@ export default function AppRoutes() {
                         <Route path="/staff/new" element={<CreateStaff />} />
                         <Route path="/staff/edit/:id" element={<EditStaff />} />
                         <Route path="/staff/:id" element={<ViewStaff />} />
-                        {/* <Route path="/doctor/new" element={<CreateDoctor />} />
-                        <Route path="/doctor/:id" element={<ViewDoctor />} />
-                        <Route path="/doctor/edit/:id" element={<EditDoctor />} /> */}
-
-                        {/* <Route path="/doctor/new" element={<CreateDoctor />} />
-
-                        <Route path="/doctor/edit/:id" element={<EditDoctor />} />
-
-                        <Route path="/doctor/view/:id" element={<ViewDoctor />} /> */}
                         
-                        {/* <Route path="/patient" element={<PatientList />} />
-                        <Route path="/staff" element={<StaffList />} />
-                        <Route path="/appointment" element={<AppointmentList />} />
+                        <Route path="/doctor/:doctorId/leave" element={<LeaveList />} />
                         <Route path="/leave" element={<LeaveList />} />
-                        <Route path="/schedule" element={<ScheduleList />} /> */}
+                        <Route path="/doctor/:doctorId/leave/new" element={<CreateLeave />} />
+                        <Route path="/doctor/:doctorId/leave/edit/:leaveId" element={<LeaveEdit />} />
+                        <Route path="/leave/edit/:id" element={<LeaveList />} />
+                        <Route path="/leave/:id" element={<ViewLeave />} />
+
+                        <Route path="/doctor/:doctorId/schedule" element={<ScheduleList />} />
+                        <Route path="/schedule" element={<ScheduleList />} />
+                        <Route path="/doctor/:doctorId/schedule/new" element={<CreateSchedule />} />
+                        <Route path="/doctor/:doctorId/schedule/edit/:scheduleId" element={<ScheduleEdit />} />
 
                     </Route>
                 </Route>

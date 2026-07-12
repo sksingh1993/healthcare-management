@@ -16,7 +16,8 @@ export default function AppTextField({
     return (
         <TextField
             fullWidth
-            label={type === "date" ? undefined : label}
+           //label={type === "date" ? undefined : label} 
+            label={label}
             name={name}
             value={value}
             onChange={onChange}
