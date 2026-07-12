@@ -60,6 +60,7 @@ function PatientList() {
     const handleSearchChange = (event) => {
         console.log("Handle Search")
         const { name, value } = event.target;
+        setPage(0);
         console.log(event.target.value)
         setSearch(prev => ({
             ...prev,

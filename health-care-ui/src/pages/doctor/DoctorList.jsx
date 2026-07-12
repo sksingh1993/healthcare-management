@@ -69,7 +69,10 @@ function DoctorList() {
 
     const handleSearch = () => {
         setPage(0);
-        loadDoctors();
+       
+            loadDoctors();
+    
+        
     };
     const handleReset = () => {
 
@@ -83,6 +86,7 @@ function DoctorList() {
     const handleSearchChange = (event) => {
 
         const { name, value } = event.target;
+        setPage(0);
         console.log(event.target);
         setSearch(prev => ({
             ...prev,

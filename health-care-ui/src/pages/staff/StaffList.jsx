@@ -89,6 +89,7 @@ export default function StaffList() {
     const handleSearchChange = (event) => {
 
         const { name, value } = event.target;
+        setPage(0);
         console.log(event.target);
         setSearch(prev => ({
             ...prev,
