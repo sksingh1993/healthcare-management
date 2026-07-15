@@ -29,12 +29,16 @@ import LeaveEdit from "../pages/leave/LeaveEdit";
 import ScheduleList from "../pages/schedule/ScheduleList";
 import CreateSchedule from "../pages/schedule/CreateSchedule";
 import ScheduleEdit from "../pages/schedule/ScheduleEdit";
+import AppointmentList from "../pages/appointment/AppointmentList";
+import CreateAppointment from "../pages/appointment/CreateAppointment";
+import ViewAppointment from "../pages/appointment/ViewAppointment";
+import EditAppointment from "../pages/appointment/EditAppointment";
 
 export default function AppRoutes() {
 
     return (
         <BrowserRouter>
-           
+
 
             <Routes>
 
@@ -51,16 +55,16 @@ export default function AppRoutes() {
                         <Route path="/doctor/:doctorId" element={<ViewDoctor />} />
                         <Route path="/doctor/edit/:doctorId" element={<EditDoctor />} />
 
-                        <Route path="/patient" element={<PatientList />}/>
-                        <Route path="/patient/new" element={<CreatePatient />}/>
-                        <Route path="/patient/:id" element={<ViewPatient />}/>
-                        <Route path="/patient/edit/:id" element={<EditPatient />}/>
+                        <Route path="/patient" element={<PatientList />} />
+                        <Route path="/patient/new" element={<CreatePatient />} />
+                        <Route path="/patient/:id" element={<ViewPatient />} />
+                        <Route path="/patient/edit/:id" element={<EditPatient />} />
 
                         <Route path="/staff" element={<StaffList />} />
                         <Route path="/staff/new" element={<CreateStaff />} />
                         <Route path="/staff/edit/:id" element={<EditStaff />} />
                         <Route path="/staff/:id" element={<ViewStaff />} />
-                        
+
                         <Route path="/doctor/:doctorId/leave" element={<LeaveList />} />
                         <Route path="/leave" element={<LeaveList />} />
                         <Route path="/doctor/:doctorId/leave/new" element={<CreateLeave />} />
@@ -73,6 +77,14 @@ export default function AppRoutes() {
                         <Route path="/doctor/:doctorId/schedule/new" element={<CreateSchedule />} />
                         <Route path="/doctor/:doctorId/schedule/edit/:scheduleId" element={<ScheduleEdit />} />
 
+                        <Route path="/appointment" element={<AppointmentList />} />
+
+                        <Route path="/appointment/new" element={<CreateAppointment />} />
+
+                        <Route path="/appointment/:id" element={<ViewAppointment />} />
+
+                        <Route path="/appointment/edit/:id" element={<EditAppointment />} />
+
                     </Route>
                 </Route>
 
@@ -80,8 +92,8 @@ export default function AppRoutes() {
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
 
             </Routes>
-            
-            
+
+
 
         </BrowserRouter>
     );

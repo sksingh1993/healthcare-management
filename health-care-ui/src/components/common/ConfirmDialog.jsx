@@ -19,7 +19,9 @@ export default function ConfirmDialog({
 
     onCancel,
 
-    loading = false
+    loading = false,
+
+    actionName
 
 }) {
 
@@ -62,7 +64,7 @@ export default function ConfirmDialog({
                     onClick={onConfirm}
                     disabled={loading}
                 >
-                    {loading ? "Deleting..." : "Delete"}
+                    {actionName?actionName:loading ? "Deleting..." : "Delete"}
                 </Button>
 
             </DialogActions>

@@ -15,7 +15,8 @@ export default function AppSelect({
     options=[],
     error,
     helperText,
-    required = false
+    required = false,
+    disabled = false
 
 }) {
 
@@ -34,6 +35,7 @@ export default function AppSelect({
                 value={value}
                 label={label}
                 onChange={onChange}
+                disabled={disabled}
             >
 
                 {
@@ -43,7 +45,7 @@ export default function AppSelect({
                             key={option.value}
                             value={option.value}
                         >
-                            {option.value}
+                            {option.label}
                         </MenuItem>
 
                     ))

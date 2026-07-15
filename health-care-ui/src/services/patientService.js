@@ -38,3 +38,11 @@ export const deletePatient = async (id) => {
     return response.data;
 
 };
+
+export const getAllPatientsForDropdown = async () => {
+
+    const response = await api.get("/patients/dropdown");
+
+    return response.data;
+
+};
