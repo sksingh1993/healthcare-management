@@ -38,3 +38,11 @@ export const deleteDoctor = async (id) => {
     return response.data;
 
 };
+
+export const getAllDoctorsForDropdown = async () => {
+
+    const response = await api.get("/doctors/dropdown");
+
+    return response.data;
+
+};
